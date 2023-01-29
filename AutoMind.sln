@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMind", "AutoMind\AutoMind.csproj", "{6207F2BC-7666-40A6-A843-55E7713FB3DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CB9FC35-0892-4914-8599-A82339003338}
+	EndGlobalSection
+EndGlobal

@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal interface Opeartor
+    internal abstract class Opeartor : FormulaElement
     {
-        public string Name { get; set; }
-        public string 
+        public List<FormulaElement> Arguments;
+        public new string Type = "Operator";
+        public string Name;
+        public abstract Opeartor ExpressForm(FormulaElement agrument);
+
     }
 }

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class Variable
+    internal class Constant : Number
     {
-        public string Name { get; set; }
-        public string View { get; set; }
+        public new string Type = "CONST";
+        public string Name;
+        public string View;
     }
 }

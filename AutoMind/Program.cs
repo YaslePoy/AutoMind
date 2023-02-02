@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Hello, mind!");
+            CalculatingEnvironment ce = new CalculatingEnvironment();
+            ce.AddEnviromentPack("formelsPacks/testPack.ep");
+
         }
     }
 }

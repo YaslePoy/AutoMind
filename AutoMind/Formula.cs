@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class Formula
+    public class Formula
     {
+        public FormulaElement Expression;
+        public FormulaElement Head;
+        public List<Property> TotalProperties
+        {
+            get
+            {
+                var total = new List<Property>();
+
+            }
+        }
     }
 }

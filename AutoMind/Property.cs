@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class Property : Constant
+    public class Property : Constant
     {
-        public static readonly new string Type = "PROP";
+        public static new readonly string Type = "PROP";
         public readonly string UnitsFull;
         public readonly string UnitsShort;
     }

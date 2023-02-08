@@ -9,7 +9,7 @@ namespace AutoMind
     internal abstract class Opeartor : FormulaElement
     {
         public List<FormulaElement> Arguments;
-        public new string Type = "Operator";
+        public static new readonly string Type = "OPERATOR";
         public string Name;
         public abstract Opeartor ExpressForm(FormulaElement agrument);
 

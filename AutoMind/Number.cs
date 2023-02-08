@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class Number : FormulaElement
+    public class Number : FormulaElement
     {
-        public static readonly new string Type = "NUMBER";
+        public static new string Type = "NUMBER";
         public double Value;
     }
 }

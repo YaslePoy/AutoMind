@@ -19,10 +19,28 @@ namespace AutoMind
         }
         public void AddEnviromentPack(string import)
         {
-            var file = File.ReadAllText(import);
-            file.Replace("\t", "");
-            file.Replace("\n", "");
-
+            var file = File.ReadAllLines(import).ToList();
+            string propNick = String.Empty;
+            string cosntNick = String.Empty;
+            var propLs = new List<string>();
+            var constLs = new List<string>();
+            for (int i = 0; i < file.Count; i++)
+            {
+                var line = file[i];
+                if (line.Contains("define"))
+                {
+                    var eq = Utils.GetDefinition(line);
+                    if(eq.name == Property.Type)
+                    {
+                        propNick = eq.nick;
+                        //AddProperties();
+                    }
+                }
+            }
+        }
+        public void AddProperties(List<string> properties)
+        {
+            
         }
     }
 }

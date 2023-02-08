@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class Constant : Number
+    public class Constant : Number
     {
-        public new string Type = "CONST";
+        public static new readonly string Type = "CONST";
         public string Name;
         public string View;
+
+        public override string ToString()
+        {
+            return base.ToString() + " " + Name;
+        }
     }
 }

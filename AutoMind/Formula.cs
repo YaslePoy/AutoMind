@@ -15,8 +15,20 @@ namespace AutoMind
             get
             {
                 var total = new List<Property>();
-
+                if (Head.DataType == "OPERATOR")
+                    total.AddRange(Opeartor.GetPropertiesInside(Head as Opeartor));
+                else if (Head.DataType == "PROP")
+                    total.Add(Head as Property);
+                if (Expression.DataType == "OPERATOR")
+                    total.AddRange(Opeartor.GetPropertiesInside(Expression as Opeartor));
+                else if (Expression.DataType == "PROP")
+                    total.Add(Expression as Property);
+                return total;
             }
+        }
+        public Formula FromString(string str, CalculatingEnvironment environment)
+        {
+            return null;
         }
     }
 }

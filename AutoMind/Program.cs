@@ -5,13 +5,8 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, mind!");
-            //CalculatingEnvironment ce = new CalculatingEnvironment();
-            //ce.AddEnviromentPack(@"formulaPacks\testPack.ep");
-            var file = File.ReadAllText(@"formulaPacks\testPack.ep");
-            var doc = new MLLDocument(file);
-            doc.Parce();
-            var props = doc["CN"].ParceList<Constant>();
-            Console.WriteLine(props[0]);
+            var testString = "abc[basdas;sadsaa;asdaw[uyrtyu;tuy56]];tests[];abab";
+            var splited = Utils.SplitMultyMarker(testString);
         }
     }
 }

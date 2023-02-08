@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AutoMind
 {
-    internal class CalculatingEnvironment
+    public class CalculatingEnvironment
     {
+        public List<Type> Operators;
         public List<Property> Properties;
         public List<Constant> Constants;
         public List<Formula> Functions;

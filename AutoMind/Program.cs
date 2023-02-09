@@ -5,8 +5,9 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, mind!");
-            var testString = "abc[basdas;sadsaa;asdaw[uyrtyu;tuy56]];tests[];abab";
-            var splited = Utils.SplitMultyMarker(testString);
+            var env = new CalculatingEnvironment();
+            env.AddEnviromentPack("formulaPacks/testPack.ep");
+            var props = env.Functions[0].TotalProperties;
         }
     }
 }

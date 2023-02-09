@@ -29,6 +29,7 @@ namespace AutoMind
         {
             return string.Join(", ", this.Select(i => $"{i.Name}[{i.Count}]"));
         }
+        public bool HasList(string id) => this.Exists(i => i.Name == id);
     }
     public class MLLList : List<MLLObject>
     {

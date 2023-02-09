@@ -10,5 +10,9 @@ namespace AutoMind
     {
         public static new string Type = "NUMBER";
         public double Value;
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }

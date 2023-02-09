@@ -25,9 +25,69 @@ namespace AutoMind
             }
             return ret;
         }
+        public Opeartor()
+        {
+            Arguments = new List<FormulaElement>();
+        }
         public Opeartor(List<FormulaElement> arguments)
         {
             Arguments = arguments;
+        }
+        public override string ToString()
+        {
+            return $"OP.{Name}[{string.Join(";", Arguments.Select(i => i.ToString()))}]";
+        }
+    }
+    public class Addition : Opeartor
+    {
+        public static new readonly string Name = "ADD";
+
+        public Addition(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Opeartor ExpressForm(FormulaElement agrument)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Subtraction : Opeartor
+    {
+        public static new readonly string Name = "SUB";
+
+        public Subtraction(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Opeartor ExpressForm(FormulaElement agrument)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Multiplication : Opeartor
+    {
+        public static new readonly string Name = "MUL";
+
+        public Multiplication(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Opeartor ExpressForm(FormulaElement agrument)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Division : Opeartor
+    {
+        public static new readonly string Name = "DIV";
+
+        public Division(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Opeartor ExpressForm(FormulaElement agrument)
+        {
+            throw new NotImplementedException();
         }
     }
 }

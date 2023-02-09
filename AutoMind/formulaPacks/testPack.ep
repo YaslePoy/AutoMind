@@ -8,5 +8,5 @@ CN{
 	add View=C0 Name=Cosmos_constant
 }
 EQ{
-	add x=5
+	add RawHead=PR.A RawExpression=OP.DIV[OP.ADD[5;PR.B];PR.Y]
 }

@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class CalculatingEnvironment
     {
-        public List<Type> Operators;
+        public static readonly List<Type> Operators = new List<Type> { typeof(Addition), typeof(Subtraction), typeof(Multiplication), typeof(Division) };
         public List<Property> Properties;
         public List<Constant> Constants;
         public List<Formula> Functions;
@@ -20,28 +20,19 @@ namespace AutoMind
         }
         public void AddEnviromentPack(string import)
         {
-            var file = File.ReadAllLines(import).ToList();
-            string propNick = String.Empty;
-            string cosntNick = String.Empty;
-            var propLs = new List<string>();
-            var constLs = new List<string>();
-            for (int i = 0; i < file.Count; i++)
-            {
-                var line = file[i];
-                if (line.Contains("define"))
+            var file = File.ReadAllText(import);
+            var doc = new MLLDocument(file);
+            doc.Parce();
+            if (doc.HasList("PR"))
+                Properties.AddRange(doc["PR"].ParceList<Property>());
+            if (doc.HasList("CN"))
+                Constants.AddRange(doc["CN"].ParceList<Constant>());
+            if (doc.HasList("EQ"))
+                doc["EQ"].ParceList<Formula>().ForEach(f =>
                 {
-                    var eq = Utils.GetDefinition(line);
-                    if(eq.name == Property.Type)
-                    {
-                        propNick = eq.nick;
-                        //AddProperties();
-                    }
-                }
-            }
-        }
-        public void AddProperties(List<string> properties)
-        {
-            
+                    f.Update(this);
+                    Functions.Add(f);
+                });
         }
     }
 }

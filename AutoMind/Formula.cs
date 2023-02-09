@@ -8,6 +8,8 @@ namespace AutoMind
 {
     public class Formula
     {
+        public string RawHead;
+        public string RawExpression;
         public FormulaElement Expression;
         public FormulaElement Head;
         public List<Property> TotalProperties
@@ -26,9 +28,12 @@ namespace AutoMind
                 return total;
             }
         }
-        public Formula FromString(string str, CalculatingEnvironment environment)
+        public void Update(CalculatingEnvironment environment)
         {
-            return null;
+            if(!string.IsNullOrWhiteSpace(RawHead)) 
+                Head = FormulaElement.ParceElement(RawHead, environment);
+            if(!string.IsNullOrWhiteSpace(RawExpression))
+                Expression = FormulaElement.ParceElement(RawExpression, environment);
         }
     }
 }

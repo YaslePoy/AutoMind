@@ -9,7 +9,7 @@ namespace AutoMind
     public class Number : FormulaElement
     {
         public static new string Type = "NUMBER";
-        public double Value;
+        public double Value = 1;
         public override string ToString()
         {
             return Value.ToString();

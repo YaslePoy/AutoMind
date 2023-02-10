@@ -11,16 +11,16 @@ namespace AutoMind
     {
         public List<FormulaElement> Arguments;
         public static new readonly string Type = "OPERATOR";
-        public static readonly string Name = "BASE";
+        public virtual string Name => "BASE";
         public abstract Opeartor ExpressForm(FormulaElement agrument);
         public static List<Property> GetPropertiesInside(Opeartor opeartor)
         {
             var ret = new List<Property>();
             foreach (var argument in opeartor.Arguments)
             {
-                if (argument.DataType == "OPERATOR")
+                if (argument is Opeartor)
                     ret.AddRange(Opeartor.GetPropertiesInside(argument as Opeartor));
-                else if (argument.DataType == "PROP")
+                else if (argument is Property)
                     ret.Add(argument as Property);
             }
             return ret;
@@ -40,7 +40,10 @@ namespace AutoMind
     }
     public class Addition : Opeartor
     {
-        public static new readonly string Name = "ADD";
+        public override string Name => "ADD";
+
+        public Addition() : base() { }
+
 
         public Addition(List<FormulaElement> arguments) : base(arguments)
         {
@@ -53,8 +56,8 @@ namespace AutoMind
     }
     public class Subtraction : Opeartor
     {
-        public static new readonly string Name = "SUB";
-
+        public override string Name => "SUB";
+        public Subtraction() : base() { }
         public Subtraction(List<FormulaElement> arguments) : base(arguments)
         {
         }
@@ -66,7 +69,8 @@ namespace AutoMind
     }
     public class Multiplication : Opeartor
     {
-        public static new readonly string Name = "MUL";
+        public override string Name => "MUL";
+        public Multiplication() : base() { }
 
         public Multiplication(List<FormulaElement> arguments) : base(arguments)
         {
@@ -79,8 +83,9 @@ namespace AutoMind
     }
     public class Division : Opeartor
     {
-        public static new readonly string Name = "DIV";
-
+        public override string Name => "DIV";
+        public Division() : base() { }
+        
         public Division(List<FormulaElement> arguments) : base(arguments)
         {
         }

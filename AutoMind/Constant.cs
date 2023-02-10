@@ -14,7 +14,7 @@ namespace AutoMind
 
         public override string ToString()
         {
-            return $"CN.{Name}";
+            return $"CN.{View}";
         }
     }
 }

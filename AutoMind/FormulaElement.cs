@@ -42,14 +42,7 @@ namespace AutoMind
                 {
                     argsE.Add(FormulaElement.ParceElement(arg, environment));
                 }
-                var flsd = CalculatingEnvironment.Operators[0].GetField("Name", BindingFlags.Static | BindingFlags.Public);
-                var o = flsd.GetValue(null);
-                var opType = CalculatingEnvironment.Operators.FirstOrDefault(i =>
-                {
-                    var field = i.GetField("Name", BindingFlags.Static | BindingFlags.Public);
-                    var nm = field.GetValue(null) as string;
-                    return nm == opName;
-                });
+                var opType = CalculatingEnvironment.Operators.FirstOrDefault(i => i.Name == opName).GetType();
                 var opInstance = Activator.CreateInstance(opType, argsE) as Opeartor;
                 return opInstance as Opeartor;
             }

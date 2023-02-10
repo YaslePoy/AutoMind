@@ -8,6 +8,7 @@
             var env = new CalculatingEnvironment();
             env.AddEnviromentPack("formulaPacks/testPack.ep");
             var props = env.Functions[0].TotalProperties;
+            var f = env.Functions[0].Expression.ToString();
         }
     }
 }

@@ -17,13 +17,13 @@ namespace AutoMind
             get
             {
                 var total = new List<Property>();
-                if (Head.DataType == "OPERATOR")
+                if (Head is Opeartor)
                     total.AddRange(Opeartor.GetPropertiesInside(Head as Opeartor));
-                else if (Head.DataType == "PROP")
+                else if (Head is Property)
                     total.Add(Head as Property);
-                if (Expression.DataType == "OPERATOR")
+                if (Expression is Opeartor)
                     total.AddRange(Opeartor.GetPropertiesInside(Expression as Opeartor));
-                else if (Expression.DataType == "PROP")
+                else if (Expression is Property)
                     total.Add(Expression as Property);
                 return total;
             }

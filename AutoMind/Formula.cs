@@ -35,5 +35,14 @@ namespace AutoMind
             if(!string.IsNullOrWhiteSpace(RawExpression))
                 Expression = FormulaElement.ParceElement(RawExpression, environment);
         }
+        public Formula ExpressFrom(Property needs)
+        {
+            FormulaElement nExp = Head;
+            FormulaElement nHead = Expression;
+            while(nHead != needs)
+            {
+
+            }
+        }
     }
 }

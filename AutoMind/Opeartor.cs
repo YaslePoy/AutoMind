@@ -12,7 +12,7 @@ namespace AutoMind
         public List<FormulaElement> Arguments;
         public static new readonly string Type = "OPERATOR";
         public virtual string Name => "BASE";
-        public abstract Opeartor ExpressForm(FormulaElement agrument);
+        public abstract Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight);
         public static List<Property> GetPropertiesInside(Opeartor opeartor)
         {
             var ret = new List<Property>();
@@ -49,9 +49,14 @@ namespace AutoMind
         {
         }
 
-        public override Opeartor ExpressForm(FormulaElement agrument)
+        public override Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
-            throw new NotImplementedException();
+            FormulaElement fe = null;
+            if (Arguments.Count == 2)
+                fe = Arguments.FirstOrDefault(i => i != argument);
+            else
+                fe = new Addition(Arguments.Where(i => i != argument).ToList());
+            return new Subtraction(new List<FormulaElement> { anotherSight, fe});
         }
     }
     public class Subtraction : Opeartor
@@ -62,7 +67,7 @@ namespace AutoMind
         {
         }
 
-        public override Opeartor ExpressForm(FormulaElement agrument)
+        public override Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
             throw new NotImplementedException();
         }
@@ -76,7 +81,7 @@ namespace AutoMind
         {
         }
 
-        public override Opeartor ExpressForm(FormulaElement agrument)
+        public override Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
             throw new NotImplementedException();
         }
@@ -90,9 +95,18 @@ namespace AutoMind
         {
         }
 
-        public override Opeartor ExpressForm(FormulaElement agrument)
+        public override Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
             throw new NotImplementedException();
+        }
+    }
+    public class Neganive : Opeartor
+    {
+        public override string Name => "NEG";
+
+        public override Opeartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
+        {
+            return 
         }
     }
 }

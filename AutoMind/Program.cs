@@ -7,8 +7,8 @@
             Console.WriteLine("Hello, mind!");
             var env = new CalculatingEnvironment();
             env.AddEnviromentPack("formulaPacks/testPack.ep");
-            var props = env.Functions[0].TotalProperties;
-            var f = env.Functions[0].Expression.ToString();
+            var props = env.Functions[0].ExpressFrom(env.Properties.FirstOrDefault(i => i.View == "B"));
+
         }
     }
 }

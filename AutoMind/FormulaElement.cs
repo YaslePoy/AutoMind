@@ -43,8 +43,8 @@ namespace AutoMind
                     argsE.Add(FormulaElement.ParceElement(arg, environment));
                 }
                 var opType = CalculatingEnvironment.Operators.FirstOrDefault(i => i.Name == opName).GetType();
-                var opInstance = Activator.CreateInstance(opType, argsE) as Opeartor;
-                return opInstance as Opeartor;
+                var opInstance = Activator.CreateInstance(opType, argsE) as Operartor;
+                return opInstance as Operartor;
             }
             return null;
         }

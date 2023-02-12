@@ -17,12 +17,12 @@ namespace AutoMind
             get
             {
                 var total = new List<Property>();
-                if (Head is Opeartor)
-                    total.AddRange(Opeartor.GetPropertiesInside(Head as Opeartor));
+                if (Head is Operartor)
+                    total.AddRange(Operartor.GetPropertiesInside(Head as Operartor));
                 else if (Head is Property)
                     total.Add(Head as Property);
-                if (Expression is Opeartor)
-                    total.AddRange(Opeartor.GetPropertiesInside(Expression as Opeartor));
+                if (Expression is Operartor)
+                    total.AddRange(Operartor.GetPropertiesInside(Expression as Operartor));
                 else if (Expression is Property)
                     total.Add(Expression as Property);
                 return total;
@@ -30,19 +30,28 @@ namespace AutoMind
         }
         public void Update(CalculatingEnvironment environment)
         {
-            if(!string.IsNullOrWhiteSpace(RawHead)) 
+            if (!string.IsNullOrWhiteSpace(RawHead))
                 Head = FormulaElement.ParceElement(RawHead, environment);
-            if(!string.IsNullOrWhiteSpace(RawExpression))
+            if (!string.IsNullOrWhiteSpace(RawExpression))
                 Expression = FormulaElement.ParceElement(RawExpression, environment);
         }
         public Formula ExpressFrom(Property needs)
         {
-            FormulaElement nExp = Head;
-            FormulaElement nHead = Expression;
-            while(nHead != needs)
-            {
 
+            if (Expression is not Operartor)
+                return null;
+            if (!(Expression as Operartor).ToString().Contains(needs.ToString()))
+                return null;
+            FormulaElement nExp = Head;
+            FormulaElement nHead = Expression as Operartor;
+            while (nHead is Operartor)
+            {
+                var localHead = nHead as Operartor;
+                var part = localHead.Arguments.FirstOrDefault(i => i.ToString().Contains(needs.ToString()));
+                nExp = (nHead as Operartor).ExpressForm(part, nExp);
+                nHead = part;
             }
+            return new Formula() { Expression = nExp, Head = nHead};
         }
     }
 }

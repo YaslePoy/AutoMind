@@ -1,0 +1,19 @@
+﻿INFO{
+	add Name=Electric Short=EL Description=Пак_базового_электричества
+}
+PR{
+	add View=q Name=Заряд UnitsFull=Кулон UnitsShort=Кл
+	add View=U Name=Напряжение UnitsFull=Вольт UnitsShort=В
+	add View=R Name=Сопротивление UnitsFull=Ом UnitsShort=Ом
+	add View=RO Name=Удельное_сопротивление UnitsFull=Ом_метр UnitsShort=Ом*мм2/м
+	add View=A Name=Работа_тока UnitsFull=Джоуль UnitsShort=Дж
+	add View=P Name=Электрическая_мощность UnitsFull=Ватт UnitsShort=Вт
+	add View=S Name=Сечение UnitsFull=Миллиметр_квадратный UnitsShort=мм2
+}
+CN{
+	add View=A0 Name=A_constant
+}
+EQ{
+	add RawHead=PR.q RawExpression=OP.MUL[PR.I;PR.t]
+	add RawHead=PR.I RawExpression=OP.DIV[PR.U;PR.R]
+}

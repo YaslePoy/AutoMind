@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace AutoMind
 {
     public abstract class FormulaElement
     {
+        public Pack Origin;
         public static readonly string Type = "NONE";
         public string DataType => GetType().GetField("Type").GetValue(this) as string;
         public override string ToString()
@@ -16,20 +18,19 @@ namespace AutoMind
             return DataType;
         }
 
-        public static FormulaElement ParceElement(string element, CalculatingEnvironment environment)
+        public static FormulaElement ParceElement(string element, CalculatingEnvironment environment, Pack origin)
         {
             if (element.IsNumeric())
                 return new Number() { Value = Utils.ParceDouble(element) };
             string head = element.Substring(0, 2);
             string body = element.Substring(3);
-            if (head == "PR")
+            if (head.Contains("PR"))
             {
-                return environment.Properties.FirstOrDefault(i => i.View == body);
+                return environment.GetProperty(element, origin);
             }
-            if (head == "CN")
+            if (head.Contains("CN"))
             {
-                var name = element.Substring(3);
-                return environment.Constants.FirstOrDefault(i => i.View == body);
+                return environment.GetConstant(element);
             }
             if (head == "OP")
             {
@@ -40,7 +41,7 @@ namespace AutoMind
                 List<FormulaElement> argsE = new List<FormulaElement>();
                 foreach (var arg in split)
                 {
-                    argsE.Add(FormulaElement.ParceElement(arg, environment));
+                    argsE.Add(FormulaElement.ParceElement(arg, environment, origin));
                 }
                 var opType = CalculatingEnvironment.Operators.FirstOrDefault(i => i.Name == opName).GetType();
                 var opInstance = Activator.CreateInstance(opType, argsE) as Operartor;

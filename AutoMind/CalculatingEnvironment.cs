@@ -12,25 +12,72 @@ namespace AutoMind
         public List<Property> Properties;
         public List<Constant> Constants;
         public List<Formula> Functions;
+        public List<Pack> ImportPacks;
+
+        public Property GetProperty(string view, Pack box)
+        {
+            var splited = view.Split(new char[] {'.', ':' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (splited.Length == 3)
+            {
+                return Properties.FirstOrDefault(i => i.Origin.Short == splited[0] && i.View == splited[2]);
+            }
+            else
+            {
+                var temp = Properties.FirstOrDefault(i => i.Origin == box && i.View == splited[1]);
+                if (temp is not null)
+                    return temp;
+                else
+                    return Properties.FirstOrDefault(i => i.View == splited[1]);
+
+            }
+        }
+        public Constant GetConstant(string view)
+        {
+
+            if (view.Contains(':'))
+            {
+                var splited = view.Split(':');
+                return Constants.FirstOrDefault(i => i.Origin.Short == splited[0] && i.View == splited[1].Split(".")[1]);
+            }
+            else
+                return Constants.FirstOrDefault(i => i.View == view);
+        }
         public CalculatingEnvironment()
         {
             Properties = new List<Property>();
             Constants = new List<Constant>();
             Functions = new List<Formula>();
+            ImportPacks = new List<Pack>();
+            AddEnviromentPack("formulaPacks/base.ep");
         }
         public void AddEnviromentPack(string import)
         {
             var file = File.ReadAllText(import);
             var doc = new MLLDocument(file);
             doc.Parce();
+            var addPack = doc["INFO"][0].Parce<Pack>();
+            if (ImportPacks.Contains(addPack))
+                return;
+            ImportPacks.Add(addPack);
+            if (doc.HasList("IM"))
+                doc["IM"].ForEach(x => AddEnviromentPack("formulaPacks\\" + x.Data["import"] + ".ep"));
             if (doc.HasList("PR"))
-                Properties.AddRange(doc["PR"].ParceList<Property>());
+            {
+                var rawList = doc["PR"].ParceList<Property>();
+                rawList.ForEach(i => i.Origin = addPack);
+                Properties.AddRange(rawList);
+            }
+
             if (doc.HasList("CN"))
-                Constants.AddRange(doc["CN"].ParceList<Constant>());
+            {
+                var rawList = doc["CN"].ParceList<Constant>();
+                rawList.ForEach(i => i.Origin = addPack);
+                Constants.AddRange(rawList);
+            }
             if (doc.HasList("EQ"))
                 doc["EQ"].ParceList<Formula>().ForEach(f =>
                 {
-                    f.Update(this);
+                    f.Update(this, addPack);
                     Functions.Add(f);
                 });
         }

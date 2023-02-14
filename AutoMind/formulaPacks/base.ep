@@ -1,0 +1,12 @@
+﻿INFO{
+	add Name=base Short=START Description=Пак_общий
+}
+PR{
+	add View=m Name=масса UnitsFull=килограмм UnitsShort=кг
+	add View=t Name=время UnitsFull=секунда UnitsShort=с
+	add View=s Name=расстояние UnitsFull=метр UnitsShort=м
+	add View=T Name=температура UnitsFull=кельвин UnitsShort=К
+	add View=I Name=Сила_тока UnitsFull=Ампер UnitsShort=А
+	add View=u Name=Скорость UnitsFull=метр_в_секунду UnitsShort=м/с
+	add View=S Name=Площадь UnitsFull=квадратный_метр UnitsShort=м2
+}

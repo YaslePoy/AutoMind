@@ -28,12 +28,12 @@ namespace AutoMind
                 return total;
             }
         }
-        public void Update(CalculatingEnvironment environment)
+        public void Update(CalculatingEnvironment environment, Pack pack)
         {
             if (!string.IsNullOrWhiteSpace(RawHead))
-                Head = FormulaElement.ParceElement(RawHead, environment);
+                Head = FormulaElement.ParceElement(RawHead, environment, pack);
             if (!string.IsNullOrWhiteSpace(RawExpression))
-                Expression = FormulaElement.ParceElement(RawExpression, environment);
+                Expression = FormulaElement.ParceElement(RawExpression, environment, pack);
         }
         public Formula ExpressFrom(Property needs)
         {

@@ -16,7 +16,7 @@ namespace AutoMind
 
         public Property GetProperty(string view, Pack box)
         {
-            var splited = view.Split(new char[] {'.', ':' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var splited = view.Split(new char[] {'.', ':'}, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             if (splited.Length == 3)
             {
                 return Properties.FirstOrDefault(i => i.Origin.Short == splited[0] && i.View == splited[2]);

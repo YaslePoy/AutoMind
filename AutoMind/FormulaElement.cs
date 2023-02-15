@@ -22,20 +22,10 @@ namespace AutoMind
         {
             if (element.IsNumeric())
                 return new Number() { Value = Utils.ParceDouble(element) };
-            string head = element.Substring(0, 2);
-            string body = element.Substring(3);
-            if (head.Contains("PR"))
+            if (element.StartsWith("OP"))
             {
-                return environment.GetProperty(element, origin);
-            }
-            if (head.Contains("CN"))
-            {
-                return environment.GetConstant(element);
-            }
-            if (head == "OP")
-            {
-                var opName = body.Substring(0, body.IndexOf("["));
-                var args = body.Substring(body.IndexOf("[") + 1);
+                var opName = element.Substring(3, element.IndexOf("[") - 3);
+                var args = element.Substring(element.IndexOf("[") + 1);
                 args = args.Substring(0, args.Length - 1);
                 var split = Utils.SplitMultyMarker(args);
                 List<FormulaElement> argsE = new List<FormulaElement>();
@@ -46,6 +36,20 @@ namespace AutoMind
                 var opType = CalculatingEnvironment.Operators.FirstOrDefault(i => i.Name == opName).GetType();
                 var opInstance = Activator.CreateInstance(opType, argsE) as Operartor;
                 return opInstance as Operartor;
+            }
+            if (element.Contains("PR"))
+            {
+                return environment.GetProperty(element, origin);
+            }
+            if (element.Contains("CN"))
+            {
+                return environment.GetConstant(element);
+            }
+            string head = element.Substring(0, 2);
+            string body = element.Substring(3);
+            if (head == "OP")
+            {
+
             }
             return null;
         }

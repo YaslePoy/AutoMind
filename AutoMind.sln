@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMind", "AutoMind\AutoMind.csproj", "{6207F2BC-7666-40A6-A843-55E7713FB3DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMind", "AutoMind\AutoMind.csproj", "{8E942022-C9B4-4B81-93BD-9F289234966F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMTgBot", "AMTgBot\AMTgBot.csproj", "{9D9DF111-9200-4C3A-9756-36EB0E69AFD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6207F2BC-7666-40A6-A843-55E7713FB3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E942022-C9B4-4B81-93BD-9F289234966F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E942022-C9B4-4B81-93BD-9F289234966F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E942022-C9B4-4B81-93BD-9F289234966F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E942022-C9B4-4B81-93BD-9F289234966F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D9DF111-9200-4C3A-9756-36EB0E69AFD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D9DF111-9200-4C3A-9756-36EB0E69AFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D9DF111-9200-4C3A-9756-36EB0E69AFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D9DF111-9200-4C3A-9756-36EB0E69AFD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

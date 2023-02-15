@@ -53,5 +53,9 @@ namespace AutoMind
             }
             return new Formula() { Expression = nExp, Head = nHead};
         }
+        public override string ToString()
+        {
+            return Head.ToString() + " = " + Expression.ToString();
+        }
     }
 }

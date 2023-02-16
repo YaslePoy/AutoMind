@@ -17,7 +17,7 @@ namespace AutoMind
         {
             return DataType;
         }
-
+        public abstract string ToView();
         public static FormulaElement ParceElement(string element, CalculatingEnvironment environment, Pack origin)
         {
             if (element.IsNumeric())
@@ -43,7 +43,7 @@ namespace AutoMind
             }
             if (element.Contains("CN"))
             {
-                return environment.GetConstant(element);
+                return environment.GetConstant(element, origin);
             }
             string head = element.Substring(0, 2);
             string body = element.Substring(3);

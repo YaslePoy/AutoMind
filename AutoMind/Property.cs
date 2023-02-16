@@ -11,5 +11,6 @@ namespace AutoMind
         public static new readonly string Type = "PROP";
         public readonly string UnitsFull;
         public readonly string UnitsShort;
+        public string UnitsView => UnitsFull.Replace('_', ' ');
     }
 }

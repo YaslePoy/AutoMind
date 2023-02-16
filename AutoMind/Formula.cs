@@ -51,11 +51,18 @@ namespace AutoMind
                 nExp = (nHead as Operartor).ExpressForm(part, nExp);
                 nHead = part;
             }
-            return new Formula() { Expression = nExp, Head = nHead};
+            return new Formula() { Expression = nExp, Head = nHead };
         }
         public override string ToString()
         {
             return Head.ToString() + " = " + Expression.ToString();
+        }
+        public string ToView()
+        {
+            var body = Expression.ToView();
+            if (body[0] == '(')
+                body = body.Substring(1, body.Length - 2);
+            return $"{Head.ToView()} = {body}";
         }
     }
 }

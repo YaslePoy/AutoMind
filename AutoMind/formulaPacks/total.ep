@@ -1,0 +1,8 @@
+﻿INFO{
+	add Name=total
+}
+IM{
+	add import=electric
+	add import=emf
+	add import=electric
+}

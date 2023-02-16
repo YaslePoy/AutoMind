@@ -6,8 +6,9 @@
         {
             Console.WriteLine("Hello, mind!");
             var env = new CalculatingEnvironment();
-            env.AddEnviromentPack("formulaPacks/emf.ep");
-            var props = env.Functions[0].ExpressFrom(env.Properties.FirstOrDefault(i => i.View == "B"));
+            env.AddEnviromentPack("total");
+            var view = env.Properties[23].UnitsView;
+            int h =  env.Properties[0].GetHashCode();
 
         }
     }

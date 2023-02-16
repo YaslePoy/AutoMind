@@ -14,5 +14,10 @@ namespace AutoMind
         {
             return Value.ToString();
         }
+
+        public override string ToView()
+        {
+            return Value.ToString();
+        }
     }
 }

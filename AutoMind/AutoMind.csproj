@@ -23,6 +23,9 @@
     <None Update="formulaPacks\testPack.ep">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="formulaPacks\total.ep">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

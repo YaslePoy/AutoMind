@@ -31,16 +31,23 @@ namespace AutoMind
 
             }
         }
-        public Constant GetConstant(string view)
+        public Constant GetConstant(string view, Pack box)
         {
 
-            if (view.Contains(':'))
+            var splited = view.Split(new char[] { '.', ':' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            if (splited.Length == 3)
             {
-                var splited = view.Split(':');
-                return Constants.FirstOrDefault(i => i.Origin.Short == splited[0] && i.View == splited[1].Split(".")[1]);
+                return Constants.FirstOrDefault(i => i.Origin.Short == splited[0] && i.View == splited[2]);
             }
             else
-                return Constants.FirstOrDefault(i => i.View == view);
+            {
+                var temp = Constants.FirstOrDefault(i => i.Origin == box && i.View == splited[1]);
+                if (temp is not null)
+                    return temp;
+                else
+                    return Constants.FirstOrDefault(i => i.View == splited[1]);
+
+            }
         }
         public CalculatingEnvironment()
         {
@@ -48,11 +55,11 @@ namespace AutoMind
             Constants = new List<Constant>();
             Functions = new List<Formula>();
             ImportPacks = new List<Pack>();
-            AddEnviromentPack("formulaPacks/base.ep");
+            AddEnviromentPack("base");
         }
         public void AddEnviromentPack(string import)
         {
-            var file = File.ReadAllText(import);
+            var file = File.ReadAllText("formulaPacks\\" + import + ".ep");
             var doc = new MLLDocument(file);
             doc.Parce();
             var addPack = doc["INFO"][0].Parce<Pack>();
@@ -60,7 +67,7 @@ namespace AutoMind
                 return;
             ImportPacks.Add(addPack);
             if (doc.HasList("IM"))
-                doc["IM"].ForEach(x => AddEnviromentPack("formulaPacks\\" + x.Data["import"] + ".ep"));
+                doc["IM"].ForEach(x => AddEnviromentPack(x.Data["import"]));
             if (doc.HasList("PR"))
             {
                 var rawList = doc["PR"].ParceList<Property>();

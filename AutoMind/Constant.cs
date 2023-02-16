@@ -16,5 +16,12 @@ namespace AutoMind
         {
             return $"CN.{View}";
         }
+        public override string ToView()
+        {
+            return View;
+        }
+
+        public string NameView => Name.Replace('_', ' ');
     }
+
 }

@@ -1,9 +1,14 @@
-﻿using Telegram.Bot;
+﻿using AMTgBot;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
+List<BotSession> sessions = new List<BotSession>();
+
+
+Bank.LoadFull();
 var botClient = new TelegramBotClient("6222012143:AAHSY35vk5EwqDgcMsMLSQhn_CJx4dAR6-s");
 
 using CancellationTokenSource cts = new();
@@ -31,24 +36,38 @@ cts.Cancel();
 
 async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
 {
-    // Only process Message updates: https://core.telegram.org/bots/api#message
-    if (update.Message is not { } message)
-        return;
-    // Only process text messages
-    if (message.Text is not { } messageText)
-        return;
+    if (update.Message is { } message)
+    {
+        if (message.Text is not { } messageText)
+            return;
+        var chatId = message.Chat.Id;
+        var ses = GetSession(chatId);
+        ses.NextMessageAsync(botClient, message);
+    }
+    if (update.CallbackQuery is { } call)
+    {
+        var chatId = call.Message.Chat.Id;
+        var ses = GetSession(chatId);
+        ses.NextButton(botClient, call);
+    }
+    //Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-    var chatId = message.Chat.Id;
-
-    Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
-
-    // Echo received message text
-    Message sentMessage = await botClient.SendTextMessageAsync(
-        chatId: chatId,
-        text: "You said:\n" + messageText,
-        cancellationToken: cancellationToken);
+    //Message sentMessage = await botClient.SendTextMessageAsync(
+    //    chatId: chatId,
+    //    text: "You said:\n" + messageText);
 }
 
+BotSession GetSession(long id)
+{
+    var ses = sessions.FirstOrDefault(i => i.ChatId == id);
+    if (ses == null)
+    {
+        ses = new BotSession() { ChatId = id };
+        sessions.Add(ses);
+    }
+    return ses;
+}
+ 
 Task HandlePollingErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
 {
     var ErrorMessage = exception switch

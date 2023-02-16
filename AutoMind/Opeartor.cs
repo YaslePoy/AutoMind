@@ -50,6 +50,11 @@
                 fe = new Addition(Arguments.Where(i => i != argument).ToList());
             return new Subtraction(new List<FormulaElement> { anotherSight, fe });
         }
+
+        public override string ToView()
+        {
+            return "(" + string.Join(" + ", Arguments.Select(i => i.ToView())) + ")";
+        }
     }
     public class Subtraction : Operartor
     {
@@ -73,6 +78,11 @@
                     return null;
             }
         }
+
+        public override string ToView()
+        {
+            return "(" + string.Join(" - ", Arguments.Select(i => i.ToView())) + ")";
+        }
     }
     public class Multiplication : Operartor
     {
@@ -91,6 +101,11 @@
             else
                 fe = new Multiplication(Arguments.Where(i => i != argument).ToList());
             return new Division(new List<FormulaElement> { anotherSight, fe });
+        }
+
+        public override string ToView()
+        {
+            return "(" + string.Join(" * ", Arguments.Select(i => i.ToView())) + ")";
         }
     }
     public class Division : Operartor
@@ -116,6 +131,11 @@
                     return null;
             }
         }
+
+        public override string ToView()
+        {
+            return "(" + string.Join(" / ", Arguments.Select(i => i.ToView())) + ")";
+        }
     }
     public class Neganive : Operartor
     {
@@ -124,6 +144,12 @@
         public override Operartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
             return new Neganive(new List<FormulaElement> { anotherSight });
+        }
+
+        public override string ToView()
+        {
+            return "-" + Arguments[0].ToString();
+
         }
     }
 }

@@ -5,11 +5,12 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, mind!");
-            var env = new CalculatingEnvironment();
-            env.AddEnviromentPack("total");
-            var view = env.Properties[23].UnitsView;
-            int h =  env.Properties[0].GetHashCode();
 
+            var env = new CalculatingEnvironment();
+            env.AddEnviromentPack("emf");
+            var field = env.LinkedEnviroment();
+            var way = new List<object>();
+            var hasWay = field.HasWayBeet(env.Properties[1], env.Properties[16], new List<LinkedElement>(), ref way);
         }
     }
 }

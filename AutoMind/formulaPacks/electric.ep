@@ -10,9 +10,6 @@ PR{
 	add View=P Name=Электрическая_мощность UnitsFull=Ватт UnitsShort=Вт
 	add View=S Name=Сечение UnitsFull=Миллиметр_квадратный UnitsShort=мм2
 }
-CN{
-	add View=A0 Name=A_constant
-}
 EQ{
 	add RawHead=PR.q RawExpression=OP.MUL[PR.I;PR.t]
 	add RawHead=PR.I RawExpression=OP.DIV[PR.U;PR.R]

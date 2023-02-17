@@ -88,5 +88,17 @@ namespace AutoMind
                     Functions.Add(f);
                 });
         }
+        public MultilinkedField LinkedEnviroment()
+        {
+            var mlf = new MultilinkedField();
+            foreach(var f in Functions)
+            {
+                foreach(var p in f.TotalProperties)
+                {
+                    mlf.AddLink(f, p);
+                }
+            }
+            return mlf;
+        }
     }
 }

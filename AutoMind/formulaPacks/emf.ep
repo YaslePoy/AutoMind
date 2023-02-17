@@ -12,9 +12,6 @@ PR{
 	add View=L Name=Длинна_проводника UnitsFull=метр UnitsShort=м
 	add View=sina Name=Синус_альфа UnitsFull=Градус UnitsShort=°
 }
-CN{
-	add View=A0 Name=A_constant
-}
 EQ{
 	add RawHead=PR.Fa RawExpression=OP.MUL[PR.I;PR.L;PR.sina]
 	add RawHead=PR.Fl RawExpression=OP.MUL[PR.q;PR.B;PR.u;PR.sina]

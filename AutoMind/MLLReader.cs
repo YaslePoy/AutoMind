@@ -20,7 +20,7 @@ namespace AutoMind
             var prepText = Utils.Clear(raw);
             var lists = prepText.Split('}').ToList();
             lists.Remove("");
-            foreach ( var l in lists)
+            foreach (var l in lists)
             {
                 Add(new MLLList(l));
             }
@@ -56,7 +56,7 @@ namespace AutoMind
         {
             return $"List of {Count} elements";
         }
-        public List<T> ParceList <T>() where T : new()
+        public List<T> ParceList<T>() where T : new()
         {
             var list = new List<T>();
             this.ForEach(i => list.Add(i.Parce<T>()));
@@ -91,7 +91,19 @@ namespace AutoMind
             var objType = typeof(T);
             foreach (var item in Data)
             {
-                objType.GetField(item.Key).SetValue(ret, item.Value);
+                var field = objType.GetField(item.Key);
+                switch (field.FieldType.Name)
+                {
+                    case "String":
+                        field.SetValue(ret, item.Value);
+                        break;
+                    case "Double":
+                        field.SetValue(ret, Utils.ParceDouble(item.Value));
+                        break;
+                    case "Integer":
+                        field.SetValue(ret, int.Parse(item.Value));
+                        break;
+                }
             }
             return ret;
         }

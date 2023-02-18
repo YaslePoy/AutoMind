@@ -64,5 +64,12 @@ namespace AutoMind
                 body = body.Substring(1, body.Length - 2);
             return $"{Head.ToView()} = {body}";
         }
+        public string ToValue()
+        {
+            var body = Expression.ToValue();
+            if (body[0] == '(')
+                body = body.Substring(1, body.Length - 2);
+            return $"{Head.ToView()} = {body}";
+        }
     }
 }

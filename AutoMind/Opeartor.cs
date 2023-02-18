@@ -55,6 +55,15 @@
         {
             return "(" + string.Join(" + ", Arguments.Select(i => i.ToView())) + ")";
         }
+        public override string ToValue()
+        {
+            return "(" + string.Join(" + ", Arguments.Select(i => i.ToValue())) + ")";
+        }
+
+        public override double GetValue()
+        {
+            return Arguments.Sum(i => i.GetValue());
+        }
     }
     public class Subtraction : Operartor
     {
@@ -83,6 +92,15 @@
         {
             return "(" + string.Join(" - ", Arguments.Select(i => i.ToView())) + ")";
         }
+        public override string ToValue()
+        {
+            return "(" + string.Join(" - ", Arguments.Select(i => i.ToValue())) + ")";
+
+        }
+        public override double GetValue()
+        {
+            return Arguments[0].GetValue() - Arguments[1].GetValue();
+        }
     }
     public class Multiplication : Operartor
     {
@@ -106,6 +124,17 @@
         public override string ToView()
         {
             return "(" + string.Join(" * ", Arguments.Select(i => i.ToView())) + ")";
+        }
+        public override string ToValue()
+        {
+            return "(" + string.Join(" * ", Arguments.Select(i => i.ToValue())) + ")";
+
+        }
+        public override double GetValue()
+        {
+            double ret = 1;
+            Arguments.ForEach(i => ret *= i.GetValue());
+            return ret;
         }
     }
     public class Division : Operartor
@@ -136,20 +165,96 @@
         {
             return "(" + string.Join(" / ", Arguments.Select(i => i.ToView())) + ")";
         }
+        public override string ToValue()
+        {
+            return "(" + string.Join(" / ", Arguments.Select(i => i.ToValue())) + ")";
+
+        }
+        public override double GetValue()
+        {
+            return Arguments[0].GetValue() / Arguments[1].GetValue();
+        }
     }
-    public class Neganive : Operartor
+    public class Negative : Operartor
     {
         public override string Name => "NEG";
-        public Neganive(List<FormulaElement> args) : base(args) { }
+        public Negative() : base() { }
+
+        public Negative(List<FormulaElement> args) : base(args) { }
         public override Operartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
         {
-            return new Neganive(new List<FormulaElement> { anotherSight });
+            return new Negative(new List<FormulaElement> { anotherSight });
         }
 
         public override string ToView()
         {
-            return "-" + Arguments[0].ToString();
+            return "-" + Arguments[0].ToView();
+        }
+        public override string ToValue()
+        {
+            return "-" + Arguments[0].ToValue();
 
         }
+        public override double GetValue()
+        {
+            return -Arguments[0].GetValue();
+        }
     }
+    public class Square : Operartor
+    {
+        public override string Name => "SQ";
+        public Square() : base() { }
+
+        public Square(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Operartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
+        {
+            return new Root(new List<FormulaElement> { anotherSight });
+        }
+
+        public override string ToView()
+        {
+            return $"{Arguments[0].ToView()}^2";
+        }
+        public override string ToValue()
+        {
+            return $"{Arguments[0].ToValue()}^2";
+
+        }
+        public override double GetValue()
+        {
+            return Math.Pow(Arguments[0].GetValue(), 2);
+        }
+    }
+    public class Root : Operartor
+    {
+        public override string Name => "RT";
+        public Root() : base() { }
+
+        public Root(List<FormulaElement> arguments) : base(arguments)
+        {
+        }
+
+        public override Operartor ExpressForm(FormulaElement argument, FormulaElement anotherSight)
+        {
+            return new Square(new List<FormulaElement> { anotherSight });
+        }
+
+        public override string ToView()
+        {
+            return $"2↓{Arguments[0].ToView()}";
+        }
+        public override string ToValue()
+        {
+            return $"2↓{Arguments[0].ToValue()}";
+
+        }
+        public override double GetValue()
+        {
+            return Math.Sqrt(Arguments[0].GetValue());
+        }
+    }
+
 }

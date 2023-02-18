@@ -17,7 +17,10 @@ namespace AutoMind
         {
             return DataType;
         }
+
+        public abstract double GetValue();
         public abstract string ToView();
+        public abstract string ToValue();
         public static FormulaElement ParceElement(string element, CalculatingEnvironment environment, Pack origin)
         {
             if (element.IsNumeric())

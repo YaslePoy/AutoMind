@@ -10,3 +10,6 @@ PR{
 	add View=u Name=Скорость UnitsFull=метр_в_секунду UnitsShort=м/с
 	add View=S Name=Площадь UnitsFull=квадратный_метр UnitsShort=м2
 }
+CN{
+	add View=PI Value=3,141592
+}

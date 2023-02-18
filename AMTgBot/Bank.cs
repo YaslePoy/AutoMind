@@ -9,11 +9,13 @@ namespace AMTgBot
 {
     public static class Bank
     {
+        public static MultilinkedField EnvField;
         public static CalculatingEnvironment Full;
         public static void LoadFull()
         {
             Full = new CalculatingEnvironment();
             Full.AddEnviromentPack("total");
+            EnvField = Full.LinkedEnviroment();
         }
     }
 }

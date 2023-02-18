@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class CalculatingEnvironment
     {
-        public static readonly List<Operartor> Operators = new List<Operartor> { new Addition(), new Subtraction(), new Multiplication(), new Division() };
+        public static readonly List<Operartor> Operators = new List<Operartor> { new Addition(), new Subtraction(), new Multiplication(), new Division(), new Negative(), new Square(), new Root() };
         public List<Property> Properties;
         public List<Constant> Constants;
         public List<Formula> Functions;

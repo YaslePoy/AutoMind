@@ -3,8 +3,8 @@
     public abstract class Operartor : FormulaElement
     {
         public List<FormulaElement> Arguments;
-        public static new readonly string Type = "OPERATOR";
-        public virtual string Name => "BASE";
+        public override string DataType => "OPERATOR";
+        public virtual string Name { get; }
         public abstract Operartor ExpressForm(FormulaElement argument, FormulaElement anotherSight);
         public static List<Property> GetPropertiesInside(Operartor opeartor)
         {

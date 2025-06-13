@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class Constant : Number
     {
-        public static new readonly string Type = "CONST";
+        public override string DataType => "CONST";
         public string Name;
         public string View;
 

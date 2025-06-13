@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class Number : FormulaElement
     {
-        public static new string Type = "NUMBER";
+        public override string DataType => "NUMBER";
         public double Value = 1;
         public override double GetValue()
         {

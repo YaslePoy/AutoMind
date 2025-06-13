@@ -11,8 +11,7 @@ namespace AutoMind
     public abstract class FormulaElement
     {
         public Pack Origin;
-        public static readonly string Type = "NONE";
-        public string DataType => GetType().GetField("Type").GetValue(this) as string;
+        public virtual string DataType { get; }
         public override string ToString()
         {
             return DataType;

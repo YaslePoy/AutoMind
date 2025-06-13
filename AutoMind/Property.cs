@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class Property : Constant
     {
-        public static new readonly string Type = "PROP";
+        public override string DataType => "PROP";
         public readonly string UnitsFull;
         public readonly string UnitsShort;
         public string UnitsView => UnitsFull.Replace('_', ' ');

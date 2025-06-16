@@ -92,7 +92,7 @@ namespace AutoMind
             foreach (var item in Data)
             {
                 var field = objType.GetField(item.Key);
-                switch (field.FieldType.Name)
+                switch (field?.FieldType.Name)
                 {
                     case "String":
                         field.SetValue(ret, item.Value);

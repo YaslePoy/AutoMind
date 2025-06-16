@@ -10,7 +10,7 @@ namespace AutoMind
 {
     public abstract class FormulaElement
     {
-        public Pack Origin;
+        public Pack Origin { get; set; }
         public virtual string DataType { get; }
         public override string ToString()
         {
@@ -20,7 +20,7 @@ namespace AutoMind
         public abstract double GetValue();
         public abstract string ToView();
         public abstract string ToValue();
-        public static FormulaElement ParceElement(string element, CalculatingEnvironment environment, Pack origin)
+        public static FormulaElement ParseElement(string element, CalculatingEnvironment environment, Pack origin)
         {
             if (element.IsNumeric())
                 return new Number() { Value = Utils.ParceDouble(element) };
@@ -33,7 +33,7 @@ namespace AutoMind
                 List<FormulaElement> argsE = new List<FormulaElement>();
                 foreach (var arg in split)
                 {
-                    argsE.Add(FormulaElement.ParceElement(arg, environment, origin));
+                    argsE.Add(FormulaElement.ParseElement(arg, environment, origin));
                 }
                 var opType = CalculatingEnvironment.Operators.FirstOrDefault(i => i.Name == opName).GetType();
                 var opInstance = Activator.CreateInstance(opType, argsE) as Operartor;

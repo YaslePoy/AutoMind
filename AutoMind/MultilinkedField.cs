@@ -8,7 +8,7 @@ namespace AutoMind
 {
     public class MultilinkedField
     {
-        List<LinkedElement> elements = new List<LinkedElement>();
+        List<LinkedElement> elements;
         public MultilinkedField()
         {
             elements = new List<LinkedElement>();
@@ -35,30 +35,36 @@ namespace AutoMind
                 way.Add(eStart.Data);
                 return true;
             }
-            else
-            {
-                List<LinkedElement> subIgnore = new List<LinkedElement>();
-                ignore.ForEach(i => subIgnore.Add(i));
-                subIgnore.Add(eEnd);
-                var ways = new List<List<object>>();
-                foreach (var l in eEnd.Links)
-                {
-                    if (ignore.Any(i => i.Data == l.Data))
-                        continue;
-                    List<object> w = new List<object>();
 
-                    if (HasWayBeet(from, l.Data, subIgnore, ref w))
-                    {
-                        w.Add(l.Data);
-                        ways.Add(w);
-                    }
-                }
-                if (ways.Count > 0)
+            List<LinkedElement> subIgnore = new List<LinkedElement>();
+            ignore.ForEach(i => subIgnore.Add(i));
+            subIgnore.Add(eEnd);
+            var ways = new List<List<object>>();
+            foreach (var l in eEnd.Links)
+            {
+                if (ignore.Any(i => i.Data == l.Data))
+                    continue;
+                List<object> w = new List<object>();
+
+                if (HasWayBeet(from, l.Data, subIgnore, ref w))
                 {
-                    way = ways.MinBy(i => i.Count);
-                    return true;
+                    w.Add(l.Data);
+                    ways.Add(w);
                 }
             }
+            if (ways.Count > 0)
+            {
+                way = ways.MinBy(i => i.Count);
+                return true;
+            }
+            return false;
+        }
+
+        public bool HasWaysToDestinaion(List<object> having, object destiantion, List<LinkedElement> ignore, out List<List<object>> way)
+        {
+            way = new List<List<object>>();
+            var elements = having.Select(Get).ToList();
+            var elementSum = elements.SelectMany(i => i.Links).ToList();
             return false;
         }
     }

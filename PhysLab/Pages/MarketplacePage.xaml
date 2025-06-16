@@ -1,0 +1,61 @@
+﻿<Page x:Class="PhysLab.Pages.MarketplacePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PhysLab.Pages"
+      mc:Ignorable="d"
+      Title="MarketplacePage" d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <TextBox Width="200" Margin="5" Text="{Binding SearchText}"></TextBox>
+                <Button Margin="5" Padding="5, 0" VerticalContentAlignment="Center" Click="ButtonBase_OnClick">Поиск</Button>
+            </StackPanel>
+            <ListBox Margin="5" SelectionChanged="Selector_OnSelectionChanged" ItemsSource="{Binding VisiblePacks}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Mark}" Width="20"></TextBlock>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding Creator}"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        <Grid Grid.Column="1" DataContext="{Binding Selected}" Margin="5">
+            <TabControl>
+                <TabItem Header="Свойства">
+                    <DataGrid ItemsSource="{Binding Properties}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="" Header="Название"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="" Header="Обозначение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="" Header="Единица обозначения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="" Header="Единица обозначения укороченная"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Константы">
+                    <DataGrid ItemsSource="{Binding Constants}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="" Header="Название"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="" Header="Обозначение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="" Header="Значение"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Формулы">
+                    <ListBox ItemsSource="{Binding Equalities}">
+                    </ListBox>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Page>

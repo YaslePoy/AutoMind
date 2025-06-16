@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PhysLab.Pages;
 
 namespace PhysLab;
 
@@ -19,5 +20,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        BaseFrame.Navigate(new SolvingPage());
     }
 }

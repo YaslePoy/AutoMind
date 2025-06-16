@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhysLab"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="1100">
+        Title="PhysLab" Height="750" Width="1100">
     <Grid>
-        <Frame Name="BaseFrame" Margin="5"/>
+        <Frame Name="BaseFrame" Margin="5" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

@@ -1,5 +1,5 @@
 ﻿INFO{
-	add Name=base Short=BASE Description=Пак_общий
+	add Identifier=base Name=Базовый_пакет Short=BASE Description=Пак_общий
 }
 PR{
 	add View=m Name=масса UnitsFull=килограмм UnitsShort=кг

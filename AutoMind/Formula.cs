@@ -31,9 +31,9 @@ namespace AutoMind
         public void Update(CalculatingEnvironment environment, Pack pack)
         {
             if (!string.IsNullOrWhiteSpace(RawHead))
-                Head = FormulaElement.ParceElement(RawHead, environment, pack);
+                Head = FormulaElement.ParseElement(RawHead, environment, pack);
             if (!string.IsNullOrWhiteSpace(RawExpression))
-                Expression = FormulaElement.ParceElement(RawExpression, environment, pack);
+                Expression = FormulaElement.ParseElement(RawExpression, environment, pack);
         }
         public Formula ExpressFrom(Property needs)
         {
@@ -55,7 +55,7 @@ namespace AutoMind
         }
         public override string ToString()
         {
-            return Head.ToString() + " = " + Expression.ToString();
+            return Head + " = " + Expression;
         }
         public string ToView()
         {

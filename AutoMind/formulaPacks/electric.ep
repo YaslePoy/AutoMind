@@ -1,5 +1,5 @@
 ﻿INFO{
-	add Name=Electric Short=EL Description=Пак_базового_электричества
+	add Identifier=electric Name=Электрический Short=EL Description=Пак_базового_электричества
 }
 PR{
 	add View=q Name=Заряд UnitsFull=Кулон UnitsShort=Кл

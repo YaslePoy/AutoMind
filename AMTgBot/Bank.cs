@@ -14,8 +14,8 @@ namespace AMTgBot
         public static void LoadFull()
         {
             Full = new CalculatingEnvironment();
-            Full.AddEnviromentPack("total");
-            EnvField = Full.LinkedEnviroment();
+            Full.AddEnvironmentPack("total");
+            EnvField = Full.LinkedEnvironment();
         }
     }
 }

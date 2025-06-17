@@ -1,12 +1,21 @@
-﻿namespace AutoMind
+﻿using System.Text.Json.Serialization;
+
+namespace AutoMind
 {
     public class Formula
     {
-        public string RawHead  {  get; set; }
-        public string RawExpression {  get; set; }
-        public FormulaElement Expression {  get; set; }
-        public FormulaElement Head {  get; set; }
-        public Pack Origin {  get; set; }
+        public string RawHead { get; set; }
+        public string RawExpression { get; set; }
+
+        [JsonIgnore]
+        public FormulaElement Expression { get; set; }
+
+        [JsonIgnore]
+        public FormulaElement Head { get; set; }
+
+        [JsonIgnore]
+        public Pack Origin { get; set; }
+
         public List<Property> TotalProperties
         {
             get
@@ -23,6 +32,7 @@
                 return total;
             }
         }
+
         public void Update(CalculatingEnvironment environment, Pack pack)
         {
             if (!string.IsNullOrWhiteSpace(RawHead))
@@ -30,9 +40,9 @@
             if (!string.IsNullOrWhiteSpace(RawExpression))
                 Expression = FormulaElement.ParseElement(RawExpression, environment, pack);
         }
+
         public Formula ExpressFrom(Property needs)
         {
-
             if (Expression is not Operartor)
                 return null;
             if (!(Expression as Operartor).ToString().Contains(needs.ToString()))
@@ -46,12 +56,15 @@
                 nExp = (nHead as Operartor).ExpressForm(part, nExp);
                 nHead = part;
             }
-            return new Formula() { Expression = nExp, Head = nHead };
+
+            return new Formula { Expression = nExp, Head = nHead };
         }
+
         public override string ToString()
         {
             return ToView();
         }
+
         public string ToView()
         {
             var body = Expression.ToView();
@@ -59,6 +72,7 @@
                 body = body.Substring(1, body.Length - 2);
             return $"{Head.ToView()} = {body}";
         }
+
         public string ToValue()
         {
             var body = Expression.ToValue();
@@ -66,7 +80,13 @@
                 body = body.Substring(1, body.Length - 2);
             return $"{Head.ToView()} = {body}";
         }
-        
+
+        public string RawView => $"{RawHead} = {RawExpression}";
         public string View => ToView();
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }

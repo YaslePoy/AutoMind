@@ -11,10 +11,12 @@ namespace PhysLab.Controls;
 public partial class FormulaControl : UserControl
 {
     FormulaEditorViewModel ViewModel = new FormulaEditorViewModel();
+    SolutionData _solutionData;
 
-    public FormulaControl(Formula formula)
+    public FormulaControl(Formula formula, SolutionData solutionData)
     {
         InitializeComponent();
+        _solutionData = solutionData;
         ViewModel.OriginalFormula = formula;
         ViewModel.WorkingFormula = formula;
 
@@ -54,14 +56,6 @@ public partial class FormulaControl : UserControl
             void OnStackPanelOnPreviewMouseDown(object s, MouseButtonEventArgs e)
             {
                 BodyProperties.Children.Clear();
-                // var currentHead = HeadBorder.Child;
-                // currentHead.PreviewMouseDown += OnStackPanelOnPreviewMouseDown;
-                // stackPanel.PreviewMouseDown -= OnStackPanelOnPreviewMouseDown;
-                // HeadBorder.Child = new TextBlock();
-                // border.Child = new TextBlock();
-                //
-                // HeadBorder.Child = stackPanel;
-                // border.Child = currentHead;
                 ViewModel.WorkingFormula = formula.ExpressFrom(totalProperty);
                 BuildForFormula(ViewModel.WorkingFormula);
             }
@@ -74,7 +68,10 @@ public partial class FormulaControl : UserControl
 
     private void SetupProperty(object sender, DragEventArgs e)
     {
-        var prop = e.Data.GetData(typeof(Property));
+        var prop = e.Data.GetData(typeof(Property)) as Property;
+        
+        _solutionData.Commutations.Add(new PropertyCommutation{ FormulasIndex = _solutionData.Formulas.IndexOf(ViewModel.OriginalFormula), PropertyIndex = _solutionData.Properties.IndexOf(prop!)});
+        _solutionData.SaveAsync();
         (((sender as Border).Child as StackPanel).Children[2] as TextBox).DataContext =
             prop;
     }

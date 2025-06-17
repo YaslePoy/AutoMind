@@ -70,7 +70,7 @@ namespace AutoMind
         }
         public static implicit operator AdvancedString(string param)
         {
-            return new AdvancedString() { data = param };
+            return new AdvancedString { data = param };
         }
         public static explicit operator string(AdvancedString param)
         {

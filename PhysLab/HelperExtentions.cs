@@ -53,4 +53,6 @@ public static class HelperExtentions
         var treeViewItem = sender as TreeViewItem;
         DragDrop.DoDragDrop(treeViewItem, treeViewItem.DataContext, DragDropEffects.Link);
     }
+
+    public static PropertyView ToPropertyView(this Property property) => new() { Identifier = property.ToString(), Value = property.Value };
 }

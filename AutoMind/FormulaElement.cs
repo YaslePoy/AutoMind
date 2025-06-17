@@ -15,7 +15,7 @@
         public static FormulaElement ParseElement(string element, CalculatingEnvironment environment, Pack origin)
         {
             if (element.IsNumeric())
-                return new Number() { Value = Utils.ParceDouble(element) };
+                return new Number { Value = Utils.ParceDouble(element) };
             if (element.StartsWith("OP"))
             {
                 var opName = element.Substring(3, element.IndexOf("[") - 3);

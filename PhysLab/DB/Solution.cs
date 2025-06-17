@@ -10,6 +10,7 @@ public class Solution : DbNamed
     public virtual User User { get; set; }
     public string InnerData { get; set; } = "";
     public string Description { get; set; }
+    
 }
 
 public class ConnectedPacks : DbEntity

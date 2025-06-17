@@ -23,14 +23,14 @@
                 <TreeViewItem Drop="Inputs_OnDrop" AllowDrop="True" Header="Входные данные" Name="Inputs">
                     <TreeViewItem.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" MouseDown="DragProperty">
+                            <StackPanel Orientation="Horizontal" MouseDown="DragProperty" Tag="Inputs">
                                 <TextBlock Text="{Binding}" Width="50"></TextBlock>
                                 <TextBox Width="50" Margin="5, 0" Text="{Binding Value}"></TextBox>
                             </StackPanel>
                         </DataTemplate>
                     </TreeViewItem.ItemTemplate>
                 </TreeViewItem>
-                <TreeViewItem Drop="Calcs_Drop" Header="Вычисления" AllowDrop="True">
+                <TreeViewItem Drop="Calcs_Drop" Header="Вычисления" AllowDrop="True" Name="Calcs">
                     <TreeViewItem.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" MouseDown="OpenFormula"></TextBlock>

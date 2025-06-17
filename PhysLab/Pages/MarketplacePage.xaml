@@ -37,7 +37,7 @@
             </Grid.RowDefinitions>
             <TabControl>
                 <TabItem Header="Свойства">
-                    <DataGrid ItemsSource="{Binding Properties}">
+                    <DataGrid ItemsSource="{Binding PropertyViews}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>

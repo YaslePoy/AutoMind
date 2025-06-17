@@ -20,7 +20,7 @@ public static class HelperExtentions
 
             foreach (var property in pack.Properties)
             {
-                var treeViewItem = new TreeViewItem { DataContext = property, Header = property };
+                var treeViewItem = new TreeViewItem { DataContext = property, Header = property, Tag = "Import"};
                 treeViewItem.MouseDown += TreeViewItemOnMouseDown;
                 pi.Items.Add(treeViewItem);
             }

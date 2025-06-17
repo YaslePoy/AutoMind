@@ -65,6 +65,10 @@ public partial class SolutionPage : Page
     {
         if (e.Data.GetDataPresent(typeof(Property)))
         {
+            if ((e.OriginalSource as TextBlock).DataContext is not "Входные данные")
+            {
+                return;
+            }
             var data = e.Data.GetData(typeof(Property)) as Property;
 
             var currentItem = sender as TreeViewItem;
@@ -100,10 +104,10 @@ public partial class SolutionPage : Page
     private void DragProperty(object sender, MouseButtonEventArgs e)
     {
         var sp = sender as StackPanel;
-        if (sp.Tag is "Inputs")
-        {
-            return;
-        }
+        // if (sp.Tag is "Inputs")
+        // {
+        //     return;
+        // }
 
         DragDrop.DoDragDrop(sp, sp.DataContext, DragDropEffects.Link);
     }

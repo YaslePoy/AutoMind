@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:PhysLab"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
     </Application.Resources>
 </Application>

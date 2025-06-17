@@ -12,16 +12,26 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TreeView Margin="5">
-            <TreeViewItem Header="{Binding Name}">
-                <TreeViewItem Header="Пакеты">
+            <TreeViewItem Header="{Binding Name}" IsExpanded="True">
+                <TreeViewItem Header="Пакеты" Name="PacksTree">
                     <TreeViewItem.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Добавить пакет" Click="MenuItem_OnClick"></MenuItem>
                         </ContextMenu>
                     </TreeViewItem.ContextMenu>
                 </TreeViewItem>
+                <TreeViewItem Drop="Inputs_OnDrop" AllowDrop="True" Header="Входные данные" Name="Inputs">
+                    <TreeViewItem.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding}" Width="50" ></TextBlock>
+                                <TextBox Width="50" Margin="5, 0" Text="{Binding Value}"></TextBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeViewItem.ItemTemplate>
+                </TreeViewItem>
+                <TreeViewItem Header="Вычисления" AllowDrop="True"></TreeViewItem>
             </TreeViewItem>
-            
         </TreeView>
     </Grid>
 </Page>

@@ -31,31 +31,42 @@
             </ListBox>
         </DockPanel>
         <Grid Grid.Column="1" DataContext="{Binding Selected}" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
             <TabControl>
                 <TabItem Header="Свойства">
                     <DataGrid ItemsSource="{Binding Properties}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="" Header="Название"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="" Header="Обозначение"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="" Header="Единица обозначения"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="" Header="Единица обозначения укороченная"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding UnitsFull}" Header="Единица обозначения"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding UnitsShort}" Header="Единица обозначения укороченная"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Константы">
                     <DataGrid ItemsSource="{Binding Constants}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="" Header="Название"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="" Header="Обозначение"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="" Header="Значение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value}" Header="Значение"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Формулы">
-                    <ListBox ItemsSource="{Binding Equalities}">
+                    <ListBox ItemsSource="{Binding Functions}">
+                    </ListBox>
+                </TabItem>
+                <TabItem Header="Зависимости">
+                    <ListBox ItemsSource="{Binding ImportPacks}">
                     </ListBox>
                 </TabItem>
             </TabControl>
+            <StackPanel Grid.Row="1">
+                <Button HorizontalAlignment="Left" Margin="5" Click="AddPack">Включить в решение</Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

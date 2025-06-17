@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoMind
+﻿namespace AutoMind
 {
     public class Formula
     {
-        public string RawHead;
-        public string RawExpression;
-        public FormulaElement Expression;
-        public FormulaElement Head;
+        public string RawHead  {  get; set; }
+        public string RawExpression {  get; set; }
+        public FormulaElement Expression {  get; set; }
+        public FormulaElement Head {  get; set; }
+        public Pack Origin {  get; set; }
         public List<Property> TotalProperties
         {
             get
@@ -55,7 +50,7 @@ namespace AutoMind
         }
         public override string ToString()
         {
-            return Head + " = " + Expression;
+            return ToView();
         }
         public string ToView()
         {
@@ -71,5 +66,7 @@ namespace AutoMind
                 body = body.Substring(1, body.Length - 2);
             return $"{Head.ToView()} = {body}";
         }
+        
+        public string View => ToView();
     }
 }

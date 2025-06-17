@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace AutoMind
+﻿namespace AutoMind
 {
     internal class Program
     {

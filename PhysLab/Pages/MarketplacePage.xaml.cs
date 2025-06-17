@@ -2,30 +2,50 @@
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using AutoMind;
 using PhysLab.DB;
 
 namespace PhysLab.Pages;
 
 public partial class MarketplacePage : Page
 {
-    private Solution _currentSolution;
+    private CalculatingEnvironment _currentEnviroment;
+    private readonly Solution _solutions;
     MarketplaceViewModel vm = new();
-    public MarketplacePage(Solution solution)
+    List<EnvironmentPack> _defaultPacks;
+    public MarketplacePage(CalculatingEnvironment enviroment, Solution solutions)
     {
-        _currentSolution = solution;
+        _currentEnviroment = enviroment;
+        _solutions = solutions;
         InitializeComponent();
         vm.VisiblePacks = PhysContext.Instance.EnvironmentPacks.Take(10).ToList();
+        _defaultPacks = vm.VisiblePacks;
         DataContext = vm;
     }
 
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        vm.Selected = (sender as ListBox).SelectedValue as EnvironmentPack;
+        var tempEnviroment = new CalculatingEnvironment(new DbPackProvider());
+        tempEnviroment.AddRawEnvironmentPack(((sender as ListBox).SelectedValue as EnvironmentPack).Data);
+        vm.Selected = tempEnviroment;
     }
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        vm.VisiblePacks = PhysContext.Instance.EnvironmentPacks.Where(i => i.Name == vm.Selected.Name).ToList();
+        if (string.IsNullOrWhiteSpace(vm.SearchText))
+        {
+            vm.VisiblePacks = _defaultPacks;
+            return;
+        }
+        vm.VisiblePacks = PhysContext.Instance.EnvironmentPacks.Where(i => i.Name == vm.SearchText).ToList();
+    }
+
+    private void AddPack(object sender, RoutedEventArgs e)
+    {
+        var pack = ((sender as Button).DataContext as CalculatingEnvironment).ImportPacks.First();
+        _currentEnviroment.AddEnvironmentPack(pack.Identifier);
+        PhysContext.Instance.ConnectedPacks.Add(new ConnectedPacks{ Solution = _solutions, EnvironmentPackId = PhysContext.Instance.EnvironmentPacks.FirstOrDefault(i => i.Identifier == pack.Identifier).Id });
+        PhysContext.Instance.SaveChanges();
     }
 }
 
@@ -33,7 +53,7 @@ public class MarketplaceViewModel : INotifyPropertyChanged
 {
     private List<EnvironmentPack> _visiblePacks;
     private string _searchText;
-    private EnvironmentPack _selected;
+    private CalculatingEnvironment _selected;
 
     public List<EnvironmentPack> VisiblePacks
     {
@@ -57,7 +77,7 @@ public class MarketplaceViewModel : INotifyPropertyChanged
         }
     }
 
-    public EnvironmentPack Selected
+    public CalculatingEnvironment Selected
     {
         get => _selected;
         set

@@ -8,6 +8,7 @@ public class Solution : DbNamed
     public int UserId { get; set; }
 
     public virtual User User { get; set; }
+    public string InnerData { get; set; } = "";
     public string Description { get; set; }
 }
 

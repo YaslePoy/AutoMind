@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoMind
+﻿namespace AutoMind
 {
     internal class MLLDocument : List<MLLList>
     {
@@ -91,8 +84,8 @@ namespace AutoMind
             var objType = typeof(T);
             foreach (var item in Data)
             {
-                var field = objType.GetField(item.Key);
-                switch (field?.FieldType.Name)
+                var field = objType.GetProperty(item.Key);
+                switch (field?.PropertyType.Name)
                 {
                     case "String":
                         field.SetValue(ret, item.Value);

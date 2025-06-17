@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoMind
+﻿namespace AutoMind
 {
     public class Number : FormulaElement
     {
         public override string DataType => "NUMBER";
-        public double Value = 1;
+        public double Value { get; set; } = 1;
         public override double GetValue()
         {
             return Value;

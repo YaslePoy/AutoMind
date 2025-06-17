@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AutoMind
+﻿namespace AutoMind
 {
     public class CalculatingEnvironment
     {
@@ -15,11 +9,10 @@ namespace AutoMind
             new Root()
         };
 
-        public List<Property> Properties;
-        public List<Constant> Constants;
-        public List<Formula> Functions;
-        public List<Pack> ImportPacks;
-
+        public List<Property> Properties { get; set; }
+        public List<Constant> Constants { get; set; }
+        public List<Formula> Functions { get; set; }
+        public List<Pack> ImportPacks { get; set; }
         public Property GetProperty(string view, Pack box)
         {
             var splited = view.Split(new char[] { '.', ':' },
@@ -63,7 +56,6 @@ namespace AutoMind
             Constants = new List<Constant>();
             Functions = new List<Formula>();
             ImportPacks = new List<Pack>();
-            AddEnvironmentPack("base");
         }
 
         public void AddRawEnvironmentPack(string data)
@@ -76,9 +68,8 @@ namespace AutoMind
             ImportPacks.Add(addPack);
             if (doc.HasList("IM"))
             {
-                
+                doc["IM"].ForEach(x => AddEnvironmentPack(x.Data["import"]));
             }
-                // doc["IM"].ForEach(x => AddEnvironmentPack(x.Data["import"]));
             if (doc.HasList("PR"))
             {
                 var rawList = doc["PR"].ParceList<Property>();
@@ -103,6 +94,7 @@ namespace AutoMind
                 {
                     f.Update(this, addPack);
                     Functions.Add(f);
+                    f.Origin = addPack;
                 });
             }
 

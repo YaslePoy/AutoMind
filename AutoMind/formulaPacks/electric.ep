@@ -1,6 +1,9 @@
 ﻿INFO{
 	add Identifier=electric Name=Электрический Short=EL Description=Пак_базового_электричества
 }
+IM{
+    add import=base
+}
 PR{
 	add View=q Name=Заряд UnitsFull=Кулон UnitsShort=Кл
 	add View=U Name=Напряжение UnitsFull=Вольт UnitsShort=В

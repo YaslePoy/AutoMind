@@ -63,7 +63,7 @@
             var doc = new MLLDocument(data);
             doc.Parce();
             var addPack = doc["INFO"][0].Parce<Pack>();
-            if (ImportPacks.Contains(addPack))
+            if (ImportPacks.Any(i => i.Identifier == addPack.Identifier))
                 return;
             ImportPacks.Add(addPack);
             if (doc.HasList("IM"))

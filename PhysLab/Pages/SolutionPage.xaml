@@ -8,7 +8,7 @@
       Title="SolutionPage" d:DesignHeight="500" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="400"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TreeView Margin="5">
@@ -23,15 +23,22 @@
                 <TreeViewItem Drop="Inputs_OnDrop" AllowDrop="True" Header="Входные данные" Name="Inputs">
                     <TreeViewItem.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding}" Width="50" ></TextBlock>
+                            <StackPanel Orientation="Horizontal" MouseDown="DragProperty">
+                                <TextBlock Text="{Binding}" Width="50"></TextBlock>
                                 <TextBox Width="50" Margin="5, 0" Text="{Binding Value}"></TextBox>
                             </StackPanel>
                         </DataTemplate>
                     </TreeViewItem.ItemTemplate>
                 </TreeViewItem>
-                <TreeViewItem Header="Вычисления" AllowDrop="True"></TreeViewItem>
+                <TreeViewItem Drop="Calcs_Drop" Header="Вычисления" AllowDrop="True">
+                    <TreeViewItem.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" MouseDown="OpenFormula"></TextBlock>
+                        </DataTemplate>
+                    </TreeViewItem.ItemTemplate>
+                </TreeViewItem>
             </TreeViewItem>
         </TreeView>
+        <Frame Grid.Column="1" Name="FormulaFrame"></Frame>
     </Grid>
 </Page>

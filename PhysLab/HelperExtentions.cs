@@ -34,7 +34,7 @@ public static class HelperExtentions
 
             foreach (var constant in pack.Constants)
             {
-                var treeViewItem = new TreeViewItem { DataContext = constant, Header = constant };
+                var treeViewItem = new TreeViewItem { DataContext = constant, Header = $"{constant} : {Math.Round(constant.Value, 4)}" };
                 treeViewItem.MouseDown += TreeViewItemOnMouseDown;
                 ci.Items.Add(treeViewItem);
             }

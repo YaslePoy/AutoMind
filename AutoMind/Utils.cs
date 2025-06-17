@@ -7,7 +7,7 @@ namespace AutoMind
         public static bool IsNumeric(this string str) =>
             double.TryParse(str, CultureInfo.InvariantCulture, out double v);
         public static double ParceDouble(string num) =>
-            double.Parse(num, CultureInfo.InvariantCulture);
+            double.Parse(num, NumberStyles.Float, CultureInfo.InvariantCulture);
         public static (string name, string nick) GetDefinition(string defifition)
         {
             var eq = defifition.Substring(7);

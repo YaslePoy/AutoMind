@@ -44,8 +44,15 @@ public partial class FormulaControl : UserControl
                 }
             };
 
-            (stackPanel.Children[2] as TextBox).SetBinding(TextBox.TextProperty, new Binding("Value"));
+            var viewChild = (stackPanel.Children[2] as TextBox);
+            viewChild.SetBinding(TextBox.TextProperty, new Binding("Value"));
 
+            var currentIndex = ViewModel.OriginalFormula.TotalProperties.FindIndex(i => i.ToString() == totalProperty.ToString());
+            int formulaIndex = _solutionData.Formulas.IndexOf(ViewModel.OriginalFormula);
+            if (_solutionData.Commutations.Find(i => i.FormulaPropertyIndex == currentIndex && i.FormulasIndex == formulaIndex) is {} commutation)
+            {
+                viewChild.DataContext = _solutionData.Properties[commutation.PropertyIndex];
+            }
             var border = new Border
             {
                 Child = stackPanel
@@ -69,8 +76,10 @@ public partial class FormulaControl : UserControl
     private void SetupProperty(object sender, DragEventArgs e)
     {
         var prop = e.Data.GetData(typeof(Property)) as Property;
-        
-        _solutionData.Commutations.Add(new PropertyCommutation{ FormulasIndex = _solutionData.Formulas.IndexOf(ViewModel.OriginalFormula), PropertyIndex = _solutionData.Properties.IndexOf(prop!)});
+
+        var propertyCommutation = new PropertyCommutation{ FormulasIndex = _solutionData.Formulas.IndexOf(ViewModel.OriginalFormula), PropertyIndex = _solutionData.Properties.IndexOf(prop!), FormulaPropertyIndex = ViewModel.OriginalFormula.TotalProperties.FindIndex(i => i.ToString() == (((sender as Border).Child as StackPanel).Children[0] as TextBlock).Text)};
+        _solutionData.Commutations.RemoveAll(i => i.FormulasIndex == propertyCommutation.FormulasIndex && i.FormulaPropertyIndex == propertyCommutation.FormulaPropertyIndex);
+        _solutionData.Commutations.Add(propertyCommutation);
         _solutionData.SaveAsync();
         (((sender as Border).Child as StackPanel).Children[2] as TextBox).DataContext =
             prop;

@@ -24,5 +24,6 @@
             <WrapPanel MaxWidth="400" Name="BodyProperties" AllowDrop="True"></WrapPanel>
         </Border>
         <TextBlock HorizontalAlignment="Center" Text="{Binding WorkingFormula}" FontSize="30" Margin="5"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontFamily="Segoe UI" Text="{Binding WorkingFormula}" FontSize="30" Margin="5"></TextBlock>
     </StackPanel>
 </UserControl>

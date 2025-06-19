@@ -9,21 +9,24 @@
 
     <StackPanel>
         <TextBlock HorizontalAlignment="Center" Text="{Binding OriginalFormula}" FontSize="30"></TextBlock>
-        <Border CornerRadius="10" Margin="5" HorizontalAlignment="Center" Name="HeadBorder" Drop="SetupProperty" AllowDrop="True">
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Text="{Binding HeadProperty}" Margin="5"></TextBlock>
+        <Border CornerRadius="10" Margin="5" HorizontalAlignment="Center" Name="HeadBorder" Drop="SetupProperty"
+                AllowDrop="True">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding}" DataContext="{Binding HeadProperty}" Margin="5"></TextBlock>
                 <TextBlock Margin="5"> : </TextBlock>
-                <TextBox IsReadOnly="True" Text="{Binding Value}" MinWidth="20" AllowDrop="True"
+                <TextBox IsReadOnly="True" Text="{Binding Value}" Name="HeadValue" DataContext="{Binding}" MinWidth="20" AllowDrop="True"
                          ></TextBox>
             </StackPanel>
         </Border>
-        <Button HorizontalAlignment="Center" Width="75" Margin="5">
+        <Button HorizontalAlignment="Center" Width="75" Margin="5" Click="Calculate" Name="CalcButton" IsEnabled="False">
             <TextBlock FontSize="18">=</TextBlock>
         </Button>
         <Border CornerRadius="10" Margin="5" HorizontalAlignment="Center">
             <WrapPanel MaxWidth="400" Name="BodyProperties" AllowDrop="True"></WrapPanel>
         </Border>
         <TextBlock HorizontalAlignment="Center" Text="{Binding WorkingFormula}" FontSize="30" Margin="5"></TextBlock>
-        <TextBlock HorizontalAlignment="Center" FontFamily="Segoe UI" Text="{Binding WorkingFormula}" FontSize="30" Margin="5"></TextBlock>
+        <TextBox HorizontalAlignment="Stretch" MinHeight="75" MaxLines="10" FontFamily="Consolas" Text="{Binding Solving}" FontSize="15"
+                   Margin="5">
+        </TextBox>
     </StackPanel>
 </UserControl>

@@ -51,7 +51,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding Value}" Header="Значение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding View}" Header="Значение"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

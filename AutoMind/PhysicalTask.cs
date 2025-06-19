@@ -27,6 +27,7 @@ namespace AutoMind
                     finalFormula = startFormula.ExpressFrom(needs);
                     (finalFormula.Head as Property).Value = finalFormula.Expression.GetValue();
                 }
+                
                 solve.AppendLine(finalFormula.ToView() + " =>");
                 solve.AppendLine(finalFormula.ToValue() + " = " + finalFormula.Head.ToValue());
                 return solve.ToString();

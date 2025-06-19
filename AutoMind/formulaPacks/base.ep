@@ -11,5 +11,5 @@ PR{
 	add View=S Name=Площадь UnitsFull=квадратный_метр UnitsShort=м2
 }
 CN{
-	add Name=Число_Пи View=PI Value=3,141592
+	add Name=Число_Пи View=PI Value=3.141592
 }

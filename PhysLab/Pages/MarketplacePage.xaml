@@ -8,20 +8,30 @@
       Title="MarketplacePage" d:DesignHeight="500" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DockPanel>
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
-                <TextBox Width="200" Margin="5" Text="{Binding SearchText}"></TextBox>
-                <Button Margin="5" Padding="5, 0" VerticalContentAlignment="Center" Click="ButtonBase_OnClick">Поиск</Button>
-            </StackPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <Button DockPanel.Dock="Left" Click="GoBack" Margin="5, 5" HorizontalAlignment="Left" Padding="5, 0">&lt;</Button>
+                <Button DockPanel.Dock="Right" Margin="5" Padding="5, 0" VerticalContentAlignment="Center"
+                        Click="ButtonBase_OnClick">
+                    Поиск
+                </Button>
+                <TextBox Margin="5" Text="{Binding SearchText}"></TextBox>
+            </DockPanel>
+            <Button Margin="5" DockPanel.Dock="Top" Click="CreatePack">+</Button>
             <ListBox Margin="5" SelectionChanged="Selector_OnSelectionChanged" ItemsSource="{Binding VisiblePacks}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Mark}" Width="20"></TextBlock>
                             <StackPanel>
+                                <StackPanel.ContextMenu>
+                                    <ContextMenu Visibility="{Binding EditVisibility}">
+                                        <MenuItem Header="Править" Click="EditPack"></MenuItem>
+                                    </ContextMenu>
+                                </StackPanel.ContextMenu>
                                 <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
                                 <TextBlock Text="{Binding Creator}"></TextBlock>
                             </StackPanel>
@@ -37,7 +47,7 @@
             </Grid.RowDefinitions>
             <TabControl>
                 <TabItem Header="Свойства">
-                    <DataGrid ItemsSource="{Binding PropertyViews}">
+                    <DataGrid ItemsSource="{Binding Properties}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>
@@ -51,7 +61,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Название"></DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding View}" Header="Обозначение"></DataGridTextColumn>
-                            <DataGridTextColumn Binding="{Binding View}" Header="Значение"></DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value}" Header="Значение"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

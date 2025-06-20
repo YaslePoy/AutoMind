@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using AutoMind;
 
 namespace PhysLab.DB;
@@ -10,8 +11,10 @@ public class EnvironmentPack : DbNamed, INotifyPropertyChanged
     private Pack? _pack;
     public string Data { get; set; }
     public string Creator { get; set; }
-    [NotMapped]
-    public string Mark { get; set; }
+
+    [ForeignKey("User")]
+    public int CreatorId { get; set; }
+    public virtual User User { get; set; }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -27,19 +30,7 @@ public class EnvironmentPack : DbNamed, INotifyPropertyChanged
         OnPropertyChanged(propertyName);
         return true;
     }
-
-    [NotMapped]
-    public Pack Pack
-    {
-        get
-        {
-            if (_pack is null)
-            {
-                
-            }
-            return _pack;
-        }
-    }
-
     public string Identifier { get; set; }
+    [NotMapped]
+    public Visibility EditVisibility => CreatorId == PhysContext.User.Id ? Visibility.Visible : Visibility.Collapsed;
 }

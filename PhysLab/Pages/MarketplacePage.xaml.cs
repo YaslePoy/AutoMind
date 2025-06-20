@@ -13,6 +13,7 @@ public partial class MarketplacePage : Page
     private readonly Solution _solutions;
     MarketplaceViewModel vm = new();
     List<EnvironmentPack> _defaultPacks;
+
     public MarketplacePage(CalculatingEnvironment enviroment, Solution solutions)
     {
         _currentEnviroment = enviroment;
@@ -26,7 +27,12 @@ public partial class MarketplacePage : Page
     private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var tempEnviroment = new CalculatingEnvironment(new DbPackProvider());
-        tempEnviroment.AddRawEnvironmentPack(((sender as ListBox).SelectedValue as EnvironmentPack).Data);
+        var selected = ((sender as ListBox).SelectedValue as EnvironmentPack);
+        if (selected != null)
+        {
+            tempEnviroment.AddRawEnvironmentPack(selected.Data);
+        }
+
         vm.Selected = tempEnviroment;
     }
 
@@ -37,6 +43,7 @@ public partial class MarketplacePage : Page
             vm.VisiblePacks = _defaultPacks;
             return;
         }
+
         vm.VisiblePacks = PhysContext.Instance.EnvironmentPacks.Where(i => i.Name == vm.SearchText).ToList();
     }
 
@@ -44,8 +51,28 @@ public partial class MarketplacePage : Page
     {
         var pack = ((sender as Button).DataContext as CalculatingEnvironment).ImportPacks.First();
         _currentEnviroment.AddEnvironmentPack(pack.Identifier);
-        PhysContext.Instance.ConnectedPacks.Add(new ConnectedPacks{ Solution = _solutions, EnvironmentPackId = PhysContext.Instance.EnvironmentPacks.FirstOrDefault(i => i.Identifier == pack.Identifier).Id });
+        PhysContext.Instance.ConnectedPacks.Add(new ConnectedPacks
+        {
+            Solution = _solutions,
+            EnvironmentPackId = PhysContext.Instance.EnvironmentPacks
+                .FirstOrDefault(i => i.Identifier == pack.Identifier).Id
+        });
         PhysContext.Instance.SaveChanges();
+    }
+
+    private void GoBack(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
+
+    private void CreatePack(object sender, RoutedEventArgs e)
+    {
+        NavigationService.Navigate(new PackPublicationPage());
+    }
+
+    private void EditPack(object sender, RoutedEventArgs e)
+    {
+        NavigationService.Navigate(new PackPublicationPage((sender as MenuItem).DataContext as EnvironmentPack));
     }
 }
 

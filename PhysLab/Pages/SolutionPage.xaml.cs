@@ -111,4 +111,9 @@ public partial class SolutionPage : Page
 
         DragDrop.DoDragDrop(sp, sp.DataContext, DragDropEffects.Link);
     }
+
+    private void GoBack(object sender, RoutedEventArgs e)
+    {
+        NavigationService.GoBack();
+    }
 }

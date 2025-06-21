@@ -55,4 +55,11 @@ public static class HelperExtentions
     }
 
     public static PropertyView ToPropertyView(this Property property) => new() { Identifier = property.ToString(), Value = property.Value };
+
+    public static bool AreValid(params object[] values)
+    {
+        if(values.Contains(null))
+            return false;
+        return values.All(v => v is not string s || !string.IsNullOrWhiteSpace(s));
+    }
 }

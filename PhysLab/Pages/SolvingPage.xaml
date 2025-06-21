@@ -25,26 +25,28 @@
             </ListBox>
         </DockPanel>
         <Grid Grid.Column="1" DataContext="{Binding Selected}" Margin="5">
-            <DockPanel Name="DescView" Visibility="Collapsed">
-                <Button Click="GotoSolution" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5">Далее</Button>
-                <TextBlock DockPanel.Dock="Top" FontSize="20" DataContext="{Binding}" Text="{Binding Description}">
-                    <TextBlock.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Править" Click="ShowEditor"></MenuItem>
-                        </ContextMenu>
-                    </TextBlock.ContextMenu>
-                </TextBlock>
+            <DockPanel>
+                <Button DockPanel.Dock="Top" HorizontalAlignment="Right" Padding="5, 0" Margin="5" Click="LogOut">Выйти</Button>
+                <DockPanel Name="DescView" Visibility="Collapsed">
+                    <Button Click="GotoSolution" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5">Далее</Button>
+                    <TextBlock DockPanel.Dock="Top" FontSize="20" DataContext="{Binding}" Text="{Binding Description}">
+                        <TextBlock.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Править" Click="ShowEditor"></MenuItem>
+                            </ContextMenu>
+                        </TextBlock.ContextMenu>
+                    </TextBlock>
+                </DockPanel>
+                <DockPanel DataContext="{Binding}" Visibility="Collapsed" Name="DescEdit">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+                        <Button Margin="5" Click="Save">Сохранить</Button>
+                        <Button Margin="5" Click="Rollback">Отменить</Button>
+                    </StackPanel>
+                    <TextBox FontSize="20" DockPanel.Dock="Top" AcceptsReturn="True" Text="{Binding Description}"
+                             MouseDoubleClick="ShowView">
+                    </TextBox>
+                </DockPanel>
             </DockPanel>
-            <DockPanel DataContext="{Binding}" Visibility="Collapsed" Name="DescEdit">
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
-                    <Button Margin="5" Click="Save">Сохранить</Button>
-                    <Button Margin="5" Click="Rollback">Отменить</Button>
-                </StackPanel>
-                <TextBox FontSize="20" DockPanel.Dock="Top" AcceptsReturn="True" Text="{Binding Description}"
-                         MouseDoubleClick="ShowView">
-                </TextBox>
-            </DockPanel>
-
         </Grid>
     </Grid>
 </Page>

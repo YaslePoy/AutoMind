@@ -50,6 +50,13 @@ public partial class MarketplacePage : Page
     private void AddPack(object sender, RoutedEventArgs e)
     {
         var pack = ((sender as Button).DataContext as CalculatingEnvironment).ImportPacks.First();
+
+        if (_currentEnviroment.ImportPacks.Any(i => i.Identifier == pack.Identifier))
+        {
+            MessageBox.Show("Этот пакет уже включен!");
+            return;
+        }
+
         _currentEnviroment.AddEnvironmentPack(pack.Identifier);
         PhysContext.Instance.ConnectedPacks.Add(new ConnectedPacks
         {
@@ -58,6 +65,7 @@ public partial class MarketplacePage : Page
                 .FirstOrDefault(i => i.Identifier == pack.Identifier).Id
         });
         PhysContext.Instance.SaveChanges();
+        MessageBox.Show("Пакет успешно включен в вычислительную среду!");
     }
 
     private void GoBack(object sender, RoutedEventArgs e)

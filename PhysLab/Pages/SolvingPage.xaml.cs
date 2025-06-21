@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -72,6 +73,12 @@ public partial class SolvingPage : Page
     private void GotoSolution(object sender, RoutedEventArgs e)
     {
         NavigationService.Navigate(new SolutionPage(vm.Selected));
+    }
+
+    private void LogOut(object sender, RoutedEventArgs e)
+    {
+        File.Delete("certificate.txt");
+        NavigationService!.Navigate(new LoginPage());
     }
 }
 

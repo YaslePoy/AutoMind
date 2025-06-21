@@ -1,0 +1,24 @@
+﻿<Page x:Class="PhysLab.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:PhysLab.Pages"
+      mc:Ignorable="d"
+      Title="LoginPage" Height="450" Width="400" HorizontalAlignment="Center">
+    <Grid>
+        <Grid>
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Margin="5" FontSize="20">PhysLab</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Margin="5" FontSize="20">Авторизация</TextBlock>
+                <TextBlock Margin="10" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center">Для предоставления доступа к функционалу PhysLab авторизуйтесь</TextBlock>
+                <TextBlock Margin="5, 0">Почта</TextBlock>
+                <TextBox Name="LoginTB" Margin="5" Height="25"></TextBox>
+                <TextBlock Margin="5, 0">Пароль</TextBlock>
+                <PasswordBox Name="PasswordPB" Margin="5" Height="25"></PasswordBox>
+                <Button Margin="5" Click="Login">Войти</Button>
+                <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="10" Foreground="Red" MouseDown="GoReg">Нет аккаунта?</TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
